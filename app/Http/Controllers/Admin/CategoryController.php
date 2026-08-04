@@ -19,7 +19,10 @@ class CategoryController extends Controller
     public function index(): Response
     {
         $categories = Category::query()
-            ->with(['parent', 'children'])
+            ->with([
+                'parent',
+                'children' => fn ($query) => $query->withCount('products'),
+            ])
             ->withCount('products')
             ->orderBy('sort_order')
             ->orderBy('name')
