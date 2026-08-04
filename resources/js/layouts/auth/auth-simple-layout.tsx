@@ -1,5 +1,6 @@
 import { Link } from '@inertiajs/react';
-import AppLogoIcon from '@/components/app-logo-icon';
+import { ThemeToggle } from '@/components/theme-toggle';
+import { useAppearance } from '@/hooks/use-appearance';
 import { home } from '@/routes';
 import type { AuthLayoutProps } from '@/types';
 
@@ -8,8 +9,13 @@ export default function AuthSimpleLayout({
     title,
     description,
 }: AuthLayoutProps) {
+    const { resolvedAppearance } = useAppearance();
+
     return (
         <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-background p-6 md:p-10">
+            <div className="absolute top-4 right-4 md:top-6 md:right-6">
+                <ThemeToggle />
+            </div>
             <div className="w-full max-w-sm">
                 <div className="flex flex-col gap-8">
                     <div className="flex flex-col items-center gap-4">
@@ -17,10 +23,11 @@ export default function AuthSimpleLayout({
                             href={home()}
                             className="flex flex-col items-center gap-2 font-medium"
                         >
-                            <div className="mb-1 flex h-9 w-9 items-center justify-center rounded-md">
-                                <AppLogoIcon className="size-9 fill-current text-[var(--foreground)] dark:text-white" />
-                            </div>
-                            <span className="sr-only">{title}</span>
+                            <img
+                                src={resolvedAppearance === 'dark' ? '/assets/img/logo-ptscm-light.webp' : '/assets/img/logo-ptscm.webp'}
+                                alt="PT Sarana Cahaya Makmur"
+                                className="size-14 w-auto rounded-sm"
+                            />
                         </Link>
 
                         <div className="space-y-2 text-center">
