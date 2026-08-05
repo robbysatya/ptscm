@@ -95,6 +95,10 @@
         ],
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
+        ],
+        "post-install-cmd": [
+            "npm ci",
+            "npm run build"
         ]
     },
     "extra": {
