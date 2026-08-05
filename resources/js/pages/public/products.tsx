@@ -11,6 +11,7 @@ import {
 import { useState } from 'react';
 import { Pagination } from '@/components/public/pagination';
 import { ProductCard } from '@/components/public/product-card';
+import { formatRupiah } from '@/lib/currency';
 import { index as productsIndex, show as productShow } from '@/routes/products';
 import type { Category, Paginated, Product } from '@/types/models';
 
@@ -317,7 +318,11 @@ function ProductListRow({ product }: { product: Product }) {
             <div className="flex h-24 w-full shrink-0 items-center justify-center border border-zinc-200 bg-gradient-to-br from-zinc-100 via-zinc-50 to-zinc-200 sm:w-32">
                 {product.image ? (
                     <img
-                        src={product.image.startsWith('http') ? product.image : `/storage/${product.image}`}
+                        src={
+                            product.image.startsWith('http')
+                                ? product.image
+                                : `/storage/${product.image}`
+                        }
                         alt={product.name}
                         className="size-full object-cover"
                     />
@@ -336,6 +341,11 @@ function ProductListRow({ product }: { product: Product }) {
                 <h3 className="mt-0.5 font-semibold text-zinc-900 group-hover:text-brand-700">
                     {product.name}
                 </h3>
+                {product.price !== null && (
+                    <p className="mt-1 font-semibold text-brand-700 tabular-nums">
+                        {formatRupiah(Number(product.price))}
+                    </p>
+                )}
                 {product.short_description && (
                     <p className="mt-1 line-clamp-1 text-sm text-zinc-500">
                         {product.short_description}

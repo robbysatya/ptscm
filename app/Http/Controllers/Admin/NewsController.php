@@ -92,6 +92,8 @@ class NewsController extends Controller
 
         if ($request->hasFile('cover_image')) {
             $data['cover_image'] = $this->storeImage->handle($request->file('cover_image'), 'news');
+        } else {
+            unset($data['cover_image']);
         }
 
         $data['published_at'] = $this->resolvePublishedAt($data, $news);

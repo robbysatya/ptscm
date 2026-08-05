@@ -34,4 +34,9 @@ enum UserRole: string
     {
         return $this === self::Superadmin;
     }
+
+    public function canManageSlides(): bool
+    {
+        return $this === self::Superadmin;
+    }
 }

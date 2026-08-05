@@ -1,6 +1,7 @@
 import { Head, Link, useForm } from '@inertiajs/react';
 import { ArrowLeft, ImagePlus, Plus, Trash2 } from 'lucide-react';
 import { useRef, useState } from 'react';
+import CurrencyInput from '@/components/currency-input';
 import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
 import {
@@ -45,6 +46,7 @@ export default function CreateProduct({
         short_description: '',
         description: '',
         image: null as File | null,
+        price: null as number | null,
         specifications: [] as Specification[],
         is_featured: false,
         is_active: true,
@@ -193,6 +195,19 @@ export default function CreateProduct({
                                     placeholder="Kosongkan untuk dibuat otomatis"
                                 />
                                 <InputError message={errors.slug} />
+                            </div>
+
+                            <div className="grid gap-2">
+                                <Label htmlFor="price">Harga</Label>
+                                <CurrencyInput
+                                    id="price"
+                                    value={data.price}
+                                    onChange={(value) =>
+                                        setData('price', value)
+                                    }
+                                    placeholder="0"
+                                />
+                                <InputError message={errors.price} />
                             </div>
 
                             <div className="grid gap-2">

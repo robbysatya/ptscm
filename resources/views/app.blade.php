@@ -1,3 +1,11 @@
+<!--
+    * Website Resmi PT Sarana Cahaya Makmur
+    * Copyright 2026 By Robby Satya Wicaksana
+    * Email : robbysatya12@gmail.com
+    *LinkedIn : https://www.linkedin.com/in/robby-satya-wicaksana/
+-->
+
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" @class(['dark' => ($appearance ?? 'system') == 'dark'])>
 

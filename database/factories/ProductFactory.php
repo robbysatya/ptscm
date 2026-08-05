@@ -24,6 +24,7 @@ class ProductFactory extends Factory
             'short_description' => fake()->sentence(),
             'description' => fake()->paragraphs(3, true),
             'image' => null,
+            'price' => fake()->optional()->numberBetween(50000, 5000000),
             'specifications' => [
                 ['label' => 'Panjang', 'value' => '6 meter'],
                 ['label' => 'Tebal', 'value' => '0.75 mm'],

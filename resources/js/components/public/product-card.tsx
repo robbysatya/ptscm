@@ -1,5 +1,6 @@
 import { Link } from '@inertiajs/react';
 import { ArrowRight } from 'lucide-react';
+import { formatRupiah } from '@/lib/currency';
 import { show as productShow } from '@/routes/products';
 import type { Product } from '@/types/models';
 
@@ -16,7 +17,11 @@ export function ProductCard({ product }: { product: Product }) {
             <div className="relative flex aspect-[4/3] items-center justify-center border-b border-zinc-200 bg-gradient-to-br from-zinc-100 via-zinc-50 to-zinc-200">
                 {product.image ? (
                     <img
-                        src={product.image.startsWith('http') ? product.image : `/storage/${product.image}`}
+                        src={
+                            product.image.startsWith('http')
+                                ? product.image
+                                : `/storage/${product.image}`
+                        }
                         alt={product.name}
                         className="size-full object-cover"
                     />
@@ -37,6 +42,11 @@ export function ProductCard({ product }: { product: Product }) {
                     <h3 className="font-semibold text-zinc-900 group-hover:text-brand-700">
                         {product.name}
                     </h3>
+                    {product.price !== null && (
+                        <p className="mt-1 font-semibold text-brand-700 tabular-nums">
+                            {formatRupiah(Number(product.price))}
+                        </p>
+                    )}
                     {product.short_description && (
                         <p className="mt-1 line-clamp-2 text-sm text-zinc-500">
                             {product.short_description}

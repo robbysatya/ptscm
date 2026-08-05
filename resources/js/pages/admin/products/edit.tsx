@@ -1,6 +1,7 @@
 import { Head, Link, useForm } from '@inertiajs/react';
 import { ArrowLeft, ImagePlus, Plus, Trash2 } from 'lucide-react';
 import { useRef, useState } from 'react';
+import CurrencyInput from '@/components/currency-input';
 import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
 import {
@@ -47,6 +48,10 @@ export default function EditProduct({
         short_description: product.short_description ?? '',
         description: product.description ?? '',
         image: null as File | null,
+        price:
+            product.price === null || product.price === undefined
+                ? null
+                : Number(product.price),
         specifications: (product.specifications ?? []) as Specification[],
         is_featured: product.is_featured,
         is_active: product.is_active,
@@ -198,6 +203,19 @@ export default function EditProduct({
                             </div>
 
                             <div className="grid gap-2">
+                                <Label htmlFor="price">Harga</Label>
+                                <CurrencyInput
+                                    id="price"
+                                    value={data.price}
+                                    onChange={(value) =>
+                                        setData('price', value)
+                                    }
+                                    placeholder="0"
+                                />
+                                <InputError message={errors.price} />
+                            </div>
+
+                            <div className="grid gap-2">
                                 <Label htmlFor="short_description">
                                     Deskripsi Singkat
                                 </Label>
@@ -256,7 +274,14 @@ export default function EditProduct({
                             <div className="flex items-start gap-4">
                                 {preview || product.image ? (
                                     <img
-                                        src={preview ?? (product.image?.startsWith('http') ? product.image : product.image ? `/storage/${product.image}` : '')}
+                                        src={
+                                            preview ??
+                                            (product.image?.startsWith('http')
+                                                ? product.image
+                                                : product.image
+                                                  ? `/storage/${product.image}`
+                                                  : '')
+                                        }
                                         alt="Pratinjau"
                                         className="size-32 rounded-lg border object-cover"
                                     />

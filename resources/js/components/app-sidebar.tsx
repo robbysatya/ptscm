@@ -2,6 +2,7 @@ import { Link, usePage } from '@inertiajs/react';
 import {
     BookOpen,
     FolderGit2,
+    Images,
     LayoutGrid,
     Newspaper,
     Package,
@@ -25,6 +26,7 @@ import { dashboard as adminDashboard } from '@/routes/admin';
 import { index as categoriesIndex } from '@/routes/admin/categories';
 import { index as newsIndex } from '@/routes/admin/news';
 import { index as productsIndex } from '@/routes/admin/products';
+import { index as slidesIndex } from '@/routes/admin/slides';
 import { index as usersIndex } from '@/routes/admin/users';
 import type { NavItem } from '@/types';
 import type { Auth } from '@/types/auth';
@@ -60,6 +62,11 @@ export function AppSidebar() {
                       title: 'Pengguna',
                       href: usersIndex(),
                       icon: Users,
+                  },
+                  {
+                      title: 'Slide Beranda',
+                      href: slidesIndex(),
+                      icon: Images,
                   },
               ]
             : []),

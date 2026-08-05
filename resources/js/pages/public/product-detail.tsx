@@ -1,6 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import { ArrowLeft, ArrowRight, BadgeCheck } from 'lucide-react';
 import { ProductCard } from '@/components/public/product-card';
+import { formatRupiah } from '@/lib/currency';
 import { contact } from '@/routes';
 import { index as productsIndex } from '@/routes/products';
 import type { Product } from '@/types/models';
@@ -36,7 +37,11 @@ export default function ProductDetail({
                         <div className="flex aspect-[4/3] items-center justify-center overflow-hidden rounded-sm border border-zinc-200 bg-gradient-to-br from-zinc-100 via-zinc-50 to-zinc-200">
                             {product.image ? (
                                 <img
-                                    src={product.image.startsWith('http') ? product.image : `/storage/${product.image}`}
+                                    src={
+                                        product.image.startsWith('http')
+                                            ? product.image
+                                            : `/storage/${product.image}`
+                                    }
                                     alt={product.name}
                                     className="size-full object-cover"
                                 />
@@ -56,6 +61,11 @@ export default function ProductDetail({
                             <h1 className="mt-4 text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl">
                                 {product.name}
                             </h1>
+                            {product.price !== null && (
+                                <p className="mt-3 text-2xl font-bold text-brand-700 tabular-nums">
+                                    {formatRupiah(Number(product.price))}
+                                </p>
+                            )}
                             {product.short_description && (
                                 <p className="mt-4 text-lg leading-relaxed text-zinc-600">
                                     {product.short_description}

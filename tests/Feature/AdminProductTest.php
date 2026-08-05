@@ -62,6 +62,51 @@ test('an admin can create a product with an image', function () {
     $this->assertDatabaseHas('products', ['name' => 'Reng 0.45']);
 });
 
+test('an admin can create a product with a price', function () {
+    $this->actingAs(User::factory()->admin()->create());
+    $category = Category::factory()->create();
+
+    $this->post(route('admin.products.store'), [
+        'category_id' => $category->id,
+        'name' => 'Canal C75',
+        'price' => 1250000,
+        'is_active' => true,
+    ])->assertRedirect();
+
+    $this->assertDatabaseHas('products', [
+        'name' => 'Canal C75',
+        'price' => 1250000.00,
+    ]);
+});
+
+test('an admin can update a product price', function () {
+    $this->actingAs(User::factory()->admin()->create());
+    $product = Product::factory()->create(['name' => 'Lama']);
+
+    $this->put(route('admin.products.update', $product), [
+        'category_id' => $product->category_id,
+        'name' => $product->name,
+        'price' => 2500000,
+        'is_active' => true,
+    ])->assertRedirect();
+
+    $this->assertDatabaseHas('products', [
+        'id' => $product->id,
+        'price' => 2500000.00,
+    ]);
+});
+
+test('product price must be a non-negative number', function () {
+    $this->actingAs(User::factory()->admin()->create());
+    $category = Category::factory()->create();
+
+    $this->post(route('admin.products.store'), [
+        'category_id' => $category->id,
+        'name' => 'Harga Negatif',
+        'price' => -1000,
+    ])->assertSessionHasErrors(['price']);
+});
+
 test('an admin can update a product', function () {
     $this->actingAs(User::factory()->admin()->create());
     $product = Product::factory()->create(['name' => 'Lama']);
@@ -75,6 +120,24 @@ test('an admin can update a product', function () {
     $this->assertDatabaseHas('products', [
         'id' => $product->id,
         'name' => 'Baru',
+    ]);
+});
+
+test('updating a product without an image keeps the existing image', function () {
+    $this->actingAs(User::factory()->admin()->create());
+    $product = Product::factory()->create(['image' => 'products/original.jpg']);
+
+    $this->put(route('admin.products.update', $product), [
+        'category_id' => $product->category_id,
+        'name' => 'Judul Baru',
+        'image' => null,
+        'is_active' => true,
+    ])->assertRedirect();
+
+    $this->assertDatabaseHas('products', [
+        'id' => $product->id,
+        'name' => 'Judul Baru',
+        'image' => 'products/original.jpg',
     ]);
 });
 

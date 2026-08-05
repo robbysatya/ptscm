@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Admin\SlideController as AdminSlideController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Public\AboutController;
 use App\Http\Controllers\Public\ContactController;
@@ -36,6 +37,10 @@ Route::prefix('admin')
         Route::resource('news', AdminNewsController::class)->except('show');
 
         Route::resource('users', AdminUserController::class)
+            ->except('show')
+            ->middleware('role:'.UserRole::Superadmin->value);
+
+        Route::resource('slides', AdminSlideController::class)
             ->except('show')
             ->middleware('role:'.UserRole::Superadmin->value);
     });

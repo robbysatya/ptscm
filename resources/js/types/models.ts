@@ -19,11 +19,23 @@ export type Product = {
     short_description: string | null;
     description: string | null;
     image: string | null;
+    price: string | null;
     specifications: Array<{ label: string; value: string }> | null;
     is_featured: boolean;
     is_active: boolean;
     sort_order: number;
     category?: Category;
+};
+
+export type Slide = {
+    id: number;
+    title: string;
+    subtitle: string | null;
+    image: string;
+    link: string | null;
+    link_label: string | null;
+    is_active: boolean;
+    sort_order: number;
 };
 
 export type NewsArticle = {

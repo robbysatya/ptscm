@@ -12,6 +12,7 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import { formatRupiah } from '@/lib/currency';
 import { dashboard as adminDashboard } from '@/routes/admin';
 import {
     create as createProduct,
@@ -108,7 +109,13 @@ export default function ProductsIndex({
                                         <div className="flex min-w-0 items-center gap-4">
                                             {product.image ? (
                                                 <img
-                                                    src={product.image.startsWith('http') ? product.image : `/storage/${product.image}`}
+                                                    src={
+                                                        product.image.startsWith(
+                                                            'http',
+                                                        )
+                                                            ? product.image
+                                                            : `/storage/${product.image}`
+                                                    }
                                                     alt={product.name}
                                                     className="size-14 shrink-0 rounded-lg object-cover"
                                                 />
@@ -125,6 +132,15 @@ export default function ProductsIndex({
                                                     {product.category?.name ??
                                                         'Tanpa kategori'}
                                                 </p>
+                                                {product.price !== null && (
+                                                    <p className="mt-0.5 text-sm font-semibold text-brand-700 tabular-nums">
+                                                        {formatRupiah(
+                                                            Number(
+                                                                product.price,
+                                                            ),
+                                                        )}
+                                                    </p>
+                                                )}
                                             </div>
                                         </div>
                                         <div className="flex shrink-0 items-center gap-3">

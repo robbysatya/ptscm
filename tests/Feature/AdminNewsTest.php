@@ -82,6 +82,24 @@ test('an admin can update a news article', function () {
     ]);
 });
 
+test('updating a news article without an image keeps the existing cover image', function () {
+    $this->actingAs(User::factory()->admin()->create());
+    $article = News::factory()->create(['cover_image' => 'news/original.jpg']);
+
+    $this->put(route('admin.news.update', $article), [
+        'title' => 'Judul Baru',
+        'content' => 'Konten baru.',
+        'status' => 'draft',
+        'cover_image' => null,
+    ])->assertRedirect();
+
+    $this->assertDatabaseHas('news', [
+        'id' => $article->id,
+        'title' => 'Judul Baru',
+        'cover_image' => 'news/original.jpg',
+    ]);
+});
+
 test('an admin can delete a news article', function () {
     $this->actingAs(User::factory()->admin()->create());
     $article = News::factory()->create();

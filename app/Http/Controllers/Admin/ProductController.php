@@ -92,6 +92,8 @@ class ProductController extends Controller
 
         if ($request->hasFile('image')) {
             $data['image'] = $this->storeImage->handle($request->file('image'), 'products');
+        } else {
+            unset($data['image']);
         }
 
         $data['specifications'] = $this->normalizeSpecifications($data['specifications'] ?? []);

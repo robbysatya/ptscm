@@ -30,6 +30,7 @@ class StoreProductRequest extends FormRequest
             'short_description' => ['nullable', 'string', 'max:500'],
             'description' => ['nullable', 'string'],
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'price' => ['nullable', 'numeric', 'min:0'],
             'specifications' => ['nullable', 'array'],
             'specifications.*.label' => ['required_with:specifications', 'string', 'max:255'],
             'specifications.*.value' => ['required_with:specifications', 'string', 'max:255'],
