@@ -1,0 +1,6 @@
+---
+deployment:
+  tasks:
+    # Ganti path ini sesuai akun cPanel Anda.
+    # Contoh: /home/username/public_html
+    - /bin/bash /home/your_cpanel_user/public_html/scripts/cpanel-deploy.sh /home/your_cpanel_user/public_html
