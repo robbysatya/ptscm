@@ -217,17 +217,17 @@ export default function Home({
                     <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
                         <div>
                             <span className="text-sm font-semibold tracking-wider text-brand-700 uppercase">
-                                Berita
+                                Proyek &amp; Galeri
                             </span>
                             <h2 className="mt-2 text-3xl font-bold tracking-tight text-zinc-900">
-                                Berita Terbaru
+                                Proyek &amp; Galeri Terbaru
                             </h2>
                         </div>
                         <Link
                             href={newsIndex()}
                             className="inline-flex items-center gap-1 font-semibold text-brand-700 hover:text-brand-800"
                         >
-                            Semua Berita
+                            Semua Proyek
                             <ArrowRight className="size-4" />
                         </Link>
                     </div>
@@ -282,6 +282,34 @@ export default function Home({
                                     <h3 className="mt-1 font-semibold text-zinc-900 group-hover:text-brand-700">
                                         {article.title}
                                     </h3>
+                                    {(article.client_name || article.project_location || article.project_year) && (
+                                        <div className="space-y-1 text-xs text-zinc-500">
+                                            {article.client_name && (
+                                                <p>
+                                                    <span className="font-medium text-zinc-600">
+                                                        Klien:
+                                                    </span>{' '}
+                                                    {article.client_name}
+                                                </p>
+                                            )}
+                                            {article.project_location && (
+                                                <p>
+                                                    <span className="font-medium text-zinc-600">
+                                                        Lokasi:
+                                                    </span>{' '}
+                                                    {article.project_location}
+                                                </p>
+                                            )}
+                                            {article.project_year && (
+                                                <p>
+                                                    <span className="font-medium text-zinc-600">
+                                                        Tahun:
+                                                    </span>{' '}
+                                                    {article.project_year}
+                                                </p>
+                                            )}
+                                        </div>
+                                    )}
                                     {article.excerpt && (
                                         <p className="line-clamp-2 text-sm text-zinc-500">
                                             {article.excerpt}

@@ -19,11 +19,14 @@ use Illuminate\Support\Carbon;
  * @property string|null $excerpt
  * @property string $content
  * @property string|null $cover_image
+ * @property string|null $client_name
+ * @property string|null $project_location
+ * @property int|null $project_year
  * @property string $category
  * @property string $status
  * @property Carbon|null $published_at
  */
-#[Fillable(['author_id', 'title', 'slug', 'excerpt', 'content', 'cover_image', 'category', 'status', 'published_at'])]
+#[Fillable(['author_id', 'title', 'slug', 'excerpt', 'content', 'cover_image', 'client_name', 'project_location', 'project_year', 'category', 'status', 'published_at'])]
 class News extends Model
 {
     public const STATUS_DRAFT = 'draft';
@@ -32,6 +35,9 @@ class News extends Model
 
     /** @var array<string, string> */
     public const CATEGORIES = [
+        'proyek' => 'Proyek Selesai',
+        'galeri' => 'Galeri Pekerjaan',
+        'kerjasama' => 'Kerja Sama',
         'pameran' => 'Pameran',
         'produk' => 'Produk Baru',
         'edukasi' => 'Edukasi',

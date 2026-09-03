@@ -52,7 +52,7 @@ export function AppSidebar() {
             icon: Package,
         },
         {
-            title: 'Berita',
+            title: 'Proyek & Galeri',
             href: newsIndex(),
             icon: Newspaper,
         },

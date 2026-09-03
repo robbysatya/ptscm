@@ -12,20 +12,20 @@ export default function News({
 }) {
     return (
         <>
-            <Head title="Berita" />
+            <Head title="Proyek & Galeri" />
 
             <section className="border-b border-zinc-800 bg-zinc-950 py-16 text-white">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <span className="text-sm font-semibold tracking-wider text-brand-400 uppercase">
-                        Berita
+                        Proyek
                     </span>
                     <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
-                        Berita &amp; Informasi
+                        Proyek &amp; Galeri Kerja Sama
                     </h1>
                     <p className="mt-4 max-w-2xl text-zinc-300">
-                        Kabar terbaru seputar produk, pameran industri, edukasi
-                        baja ringan, dan kegiatan perusahaan dari PT Sarana
-                        Cahaya Makmur.
+                        Dokumentasi pekerjaan, proyek selesai, dan kolaborasi
+                        perusahaan yang telah kami kerjakan bersama mitra dan
+                        pelanggan PT Sarana Cahaya Makmur.
                     </p>
                 </div>
             </section>
@@ -37,10 +37,11 @@ export default function News({
                             <Newspaper className="size-12 text-zinc-300" />
                             <div>
                                 <h2 className="font-semibold text-zinc-900">
-                                    Belum ada berita
+                                    Belum ada proyek atau galeri
                                 </h2>
                                 <p className="mt-1 text-sm text-zinc-500">
-                                    Nantikan informasi terbaru dari kami.
+                                    Kami sedang menyiapkan dokumentasi proyek dan
+                                    kerja sama terbaru.
                                 </p>
                             </div>
                         </div>
@@ -91,13 +92,41 @@ export default function News({
                                             <h2 className="font-semibold text-zinc-900 group-hover:text-brand-700">
                                                 {article.title}
                                             </h2>
+                                            {(article.client_name || article.project_location || article.project_year) && (
+                                                <div className="mt-1 space-y-1 text-xs text-zinc-500">
+                                                    {article.client_name && (
+                                                        <p>
+                                                            <span className="font-medium text-zinc-600">
+                                                                Klien:
+                                                            </span>{' '}
+                                                            {article.client_name}
+                                                        </p>
+                                                    )}
+                                                    {article.project_location && (
+                                                        <p>
+                                                            <span className="font-medium text-zinc-600">
+                                                                Lokasi:
+                                                            </span>{' '}
+                                                            {article.project_location}
+                                                        </p>
+                                                    )}
+                                                    {article.project_year && (
+                                                        <p>
+                                                            <span className="font-medium text-zinc-600">
+                                                                Tahun:
+                                                            </span>{' '}
+                                                            {article.project_year}
+                                                        </p>
+                                                    )}
+                                                </div>
+                                            )}
                                             {article.excerpt && (
                                                 <p className="line-clamp-3 text-sm leading-relaxed text-zinc-500">
                                                     {article.excerpt}
                                                 </p>
                                             )}
                                             <span className="mt-auto inline-flex items-center gap-1 pt-2 text-sm font-semibold text-brand-700">
-                                                Baca Selengkapnya
+                                                Lihat Detail Proyek
                                                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
                                             </span>
                                         </div>

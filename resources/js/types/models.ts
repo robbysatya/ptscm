@@ -46,6 +46,9 @@ export type NewsArticle = {
     excerpt: string | null;
     content: string;
     cover_image: string | null;
+    client_name: string | null;
+    project_location: string | null;
+    project_year: number | string | null;
     category: string;
     status: 'draft' | 'published';
     published_at: string | null;

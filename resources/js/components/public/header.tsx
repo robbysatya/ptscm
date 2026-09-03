@@ -9,7 +9,7 @@ const navItems = [
     { title: 'Beranda', href: home() },
     { title: 'Tentang Kami', href: about() },
     { title: 'Produk', href: productsIndex() },
-    { title: 'Berita', href: newsIndex() },
+    { title: 'Proyek', href: newsIndex() },
     { title: 'Kontak', href: contact() },
 ];
 

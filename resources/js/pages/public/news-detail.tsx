@@ -22,7 +22,7 @@ export default function NewsDetail({
                         className="inline-flex items-center gap-1 text-sm text-zinc-400 hover:text-white"
                     >
                         <ArrowLeft className="size-4" />
-                        Kembali ke Berita
+                        Kembali ke Proyek &amp; Galeri
                     </Link>
                     <div className="mt-6 flex items-center gap-3">
                         <span className="rounded-sm bg-brand-700 px-2 py-0.5 text-xs font-semibold tracking-wide text-white uppercase">
@@ -68,6 +68,40 @@ export default function NewsDetail({
                     )}
 
                     <div className="mx-auto max-w-[65ch]">
+                        {(article.client_name || article.project_location || article.project_year) && (
+                            <div className="mb-8 grid gap-3 rounded-sm border border-zinc-200 bg-zinc-50 p-5 text-sm text-zinc-700 sm:grid-cols-3">
+                                {article.client_name && (
+                                    <div>
+                                        <p className="text-xs font-semibold tracking-wide text-zinc-500 uppercase">
+                                            Klien
+                                        </p>
+                                        <p className="mt-1 font-medium text-zinc-900">
+                                            {article.client_name}
+                                        </p>
+                                    </div>
+                                )}
+                                {article.project_location && (
+                                    <div>
+                                        <p className="text-xs font-semibold tracking-wide text-zinc-500 uppercase">
+                                            Lokasi
+                                        </p>
+                                        <p className="mt-1 font-medium text-zinc-900">
+                                            {article.project_location}
+                                        </p>
+                                    </div>
+                                )}
+                                {article.project_year && (
+                                    <div>
+                                        <p className="text-xs font-semibold tracking-wide text-zinc-500 uppercase">
+                                            Tahun
+                                        </p>
+                                        <p className="mt-1 font-medium text-zinc-900">
+                                            {article.project_year}
+                                        </p>
+                                    </div>
+                                )}
+                            </div>
+                        )}
                         {article.excerpt && (
                             <p className="mb-8 text-lg leading-relaxed font-medium text-zinc-700">
                                 {article.excerpt}
@@ -88,13 +122,13 @@ export default function NewsDetail({
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="flex items-end justify-between gap-6">
                             <h2 className="text-2xl font-bold tracking-tight text-zinc-900">
-                                Berita Lainnya
+                                Proyek Lainnya
                             </h2>
                             <Link
                                 href={newsIndex()}
                                 className="inline-flex items-center gap-1 text-sm font-semibold text-brand-700 hover:text-brand-800"
                             >
-                                Semua Berita
+                                Semua Proyek
                                 <ArrowRight className="size-4" />
                             </Link>
                         </div>

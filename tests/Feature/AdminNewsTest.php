@@ -53,6 +53,30 @@ test('news category must be one of the allowed categories', function () {
     ])->assertSessionHasErrors(['category']);
 });
 
+test('a project gallery item can be created with a project category', function () {
+    $admin = User::factory()->admin()->create();
+    $this->actingAs($admin);
+
+    $this->post(route('admin.news.store'), [
+        'title' => 'Proyek Warehouse Metro',
+        'content' => 'Galeri proyek penyelesaian warehouse untuk mitra lokal.',
+        'client_name' => 'PT Maju Bersama',
+        'project_location' => 'Metro Lampung',
+        'project_year' => 2026,
+        'category' => 'proyek',
+        'status' => 'published',
+    ])->assertRedirect();
+
+    $this->assertDatabaseHas('news', [
+        'title' => 'Proyek Warehouse Metro',
+        'client_name' => 'PT Maju Bersama',
+        'project_location' => 'Metro Lampung',
+        'project_year' => 2026,
+        'category' => 'proyek',
+        'status' => 'published',
+    ]);
+});
+
 test('a draft article keeps a null published_at', function () {
     $this->actingAs(User::factory()->admin()->create());
 

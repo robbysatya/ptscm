@@ -1,4 +1,7 @@
 export const NEWS_CATEGORY_LABELS: Record<string, string> = {
+    proyek: 'Proyek Selesai',
+    galeri: 'Galeri Pekerjaan',
+    kerjasama: 'Kerja Sama',
     pameran: 'Pameran',
     produk: 'Produk Baru',
     edukasi: 'Edukasi',

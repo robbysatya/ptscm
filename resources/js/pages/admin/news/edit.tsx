@@ -59,6 +59,9 @@ export default function EditNews({
         excerpt: article.excerpt ?? '',
         content: article.content,
         cover_image: null as File | null,
+        client_name: article.client_name ?? '',
+        project_location: article.project_location ?? '',
+        project_year: article.project_year ? String(article.project_year) : '',
         category: article.category,
         status: article.status,
         published_at: toDateTimeLocal(article.published_at),
@@ -84,7 +87,7 @@ export default function EditNews({
 
     return (
         <>
-            <Head title={`Edit Berita ${article.title}`} />
+            <Head title={`Edit Proyek ${article.title}`} />
 
             <div className="flex flex-col gap-6 p-4">
                 <div className="flex items-center gap-4">
@@ -95,10 +98,10 @@ export default function EditNews({
                     </Button>
                     <div>
                         <h1 className="text-xl font-semibold tracking-tight">
-                            Edit Berita
+                            Edit Proyek
                         </h1>
                         <p className="text-sm text-muted-foreground">
-                            Perbarui artikel {article.title}.
+                            Perbarui detail proyek {article.title}.
                         </p>
                     </div>
                 </div>
@@ -106,9 +109,9 @@ export default function EditNews({
                 <form onSubmit={submit} className="max-w-3xl space-y-6">
                     <Card>
                         <CardHeader>
-                            <CardTitle>Informasi Artikel</CardTitle>
+                            <CardTitle>Informasi Proyek</CardTitle>
                             <CardDescription>
-                                Detail utama berita.
+                                Detail utama proyek atau galeri kerja sama.
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-4">
@@ -120,7 +123,7 @@ export default function EditNews({
                                     onChange={(event) =>
                                         setData('title', event.target.value)
                                     }
-                                    placeholder="Judul berita"
+                                    placeholder="Judul proyek atau kerja sama"
                                 />
                                 <InputError message={errors.title} />
                             </div>
@@ -136,6 +139,50 @@ export default function EditNews({
                                     placeholder="Kosongkan untuk dibuat otomatis"
                                 />
                                 <InputError message={errors.slug} />
+                            </div>
+
+                            <div className="grid gap-4 md:grid-cols-3">
+                                <div className="grid gap-2">
+                                    <Label htmlFor="client_name">Nama Klien</Label>
+                                    <Input
+                                        id="client_name"
+                                        value={data.client_name}
+                                        onChange={(event) =>
+                                            setData('client_name', event.target.value)
+                                        }
+                                        placeholder="PT Maju Bersama"
+                                    />
+                                    <InputError message={errors.client_name} />
+                                </div>
+
+                                <div className="grid gap-2">
+                                    <Label htmlFor="project_location">Lokasi Proyek</Label>
+                                    <Input
+                                        id="project_location"
+                                        value={data.project_location}
+                                        onChange={(event) =>
+                                            setData('project_location', event.target.value)
+                                        }
+                                        placeholder="Metro Lampung"
+                                    />
+                                    <InputError message={errors.project_location} />
+                                </div>
+
+                                <div className="grid gap-2">
+                                    <Label htmlFor="project_year">Tahun Pengerjaan</Label>
+                                    <Input
+                                        id="project_year"
+                                        type="number"
+                                        min="1900"
+                                        max="2100"
+                                        value={data.project_year}
+                                        onChange={(event) =>
+                                            setData('project_year', event.target.value)
+                                        }
+                                        placeholder="2026"
+                                    />
+                                    <InputError message={errors.project_year} />
+                                </div>
                             </div>
 
                             <div className="grid gap-2">
@@ -174,7 +221,7 @@ export default function EditNews({
                                         setData('excerpt', event.target.value)
                                     }
                                     rows={3}
-                                    placeholder="Ringkasan singkat artikel"
+                                    placeholder="Ringkasan singkat proyek atau hasil kerja"
                                 />
                                 <InputError message={errors.excerpt} />
                             </div>
@@ -188,7 +235,7 @@ export default function EditNews({
                                         setData('content', event.target.value)
                                     }
                                     rows={14}
-                                    placeholder="Konten lengkap artikel. Mendukung HTML sederhana."
+                                    placeholder="Deskripsi proyek, pencapaian, dan detail kerja sama. Mendukung HTML sederhana."
                                 />
                                 <InputError message={errors.content} />
                             </div>
@@ -199,7 +246,7 @@ export default function EditNews({
                         <CardHeader>
                             <CardTitle>Gambar Sampul</CardTitle>
                             <CardDescription>
-                                Unggah gambar sampul artikel (JPG, PNG, atau
+                                Unggah gambar sampul proyek (JPG, PNG, atau
                                 WebP, maks. 2MB).
                             </CardDescription>
                         </CardHeader>
@@ -263,7 +310,7 @@ export default function EditNews({
                         <CardHeader>
                             <CardTitle>Publikasi</CardTitle>
                             <CardDescription>
-                                Atur status publikasi artikel.
+                                Atur status publikasi proyek.
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-4">
@@ -330,7 +377,7 @@ export default function EditNews({
 EditNews.layout = {
     breadcrumbs: [
         { title: 'Dashboard', href: adminDashboard() },
-        { title: 'Berita', href: newsIndex() },
+        { title: 'Proyek & Galeri', href: newsIndex() },
         { title: 'Edit', href: newsIndex() },
     ],
 };
