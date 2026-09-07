@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreNewsRequest;
 use App\Http\Requests\UpdateNewsRequest;
 use App\Models\News;
+use App\Models\NewsImage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -65,6 +66,8 @@ class NewsController extends Controller
 
         $article = News::create($data);
 
+        $this->storeGalleryImages($request, $article);
+
         Inertia::flash('toast', ['type' => 'success', 'message' => __('Berita berhasil dibuat.')]);
 
         return to_route('admin.news.edit', $article);
@@ -78,7 +81,7 @@ class NewsController extends Controller
         Gate::authorize('update', $news);
 
         return Inertia::render('admin/news/edit', [
-            'article' => $news,
+            'article' => $news->load('galleryImages'),
             'categories' => News::CATEGORIES,
         ]);
     }
@@ -99,6 +102,8 @@ class NewsController extends Controller
         $data['published_at'] = $this->resolvePublishedAt($data, $news);
 
         $news->update($data);
+
+        $this->storeGalleryImages($request, $news);
 
         Inertia::flash('toast', ['type' => 'success', 'message' => __('Berita berhasil diperbarui.')]);
 
@@ -131,5 +136,18 @@ class NewsController extends Controller
         }
 
         return $data['published_at'] ?? $news?->published_at?->toDateTimeString() ?? now()->toDateTimeString();
+    }
+
+    private function storeGalleryImages(Request $request, News $news): void
+    {
+        $sortOrder = $news->galleryImages()->count();
+
+        foreach ($request->file('gallery_images', []) as $index => $file) {
+            NewsImage::create([
+                'news_id' => $news->id,
+                'path' => $this->storeImage->handle($file, 'news/gallery'),
+                'sort_order' => $sortOrder + $index,
+            ]);
+        }
     }
 }

@@ -30,6 +30,8 @@ class StoreNewsRequest extends FormRequest
             'excerpt' => ['nullable', 'string', 'max:500'],
             'content' => ['required', 'string'],
             'cover_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'gallery_images' => ['nullable', 'array', 'max:12'],
+            'gallery_images.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'client_name' => ['nullable', 'string', 'max:255'],
             'project_location' => ['nullable', 'string', 'max:255'],
             'project_year' => ['nullable', 'integer', 'min:1900', 'max:2100'],

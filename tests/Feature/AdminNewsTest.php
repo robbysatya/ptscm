@@ -2,6 +2,8 @@
 
 use App\Models\News;
 use App\Models\User;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 test('an admin can access the news listing', function () {
     $this->actingAs(User::factory()->admin()->create());
@@ -75,6 +77,31 @@ test('a project gallery item can be created with a project category', function (
         'category' => 'proyek',
         'status' => 'published',
     ]);
+});
+
+test('an admin can add multiple project gallery images', function () {
+    Storage::fake('public');
+    $this->actingAs(User::factory()->admin()->create());
+
+    $this->post(route('admin.news.store'), [
+        'title' => 'Proyek Dengan Gallery',
+        'content' => 'Dokumentasi proyek.',
+        'category' => 'proyek',
+        'status' => 'draft',
+        'gallery_images' => [
+            UploadedFile::fake()->image('tampak-depan.jpg'),
+            UploadedFile::fake()->image('tampak-samping.jpg'),
+        ],
+    ])->assertRedirect();
+
+    $article = News::where('title', 'Proyek Dengan Gallery')->firstOrFail();
+
+    expect($article->galleryImages)->toHaveCount(2);
+    expect($article->galleryImages->pluck('sort_order')->all())->toBe([0, 1]);
+
+    foreach ($article->galleryImages as $image) {
+        Storage::disk('public')->assertExists($image->path);
+    }
 });
 
 test('a draft article keeps a null published_at', function () {

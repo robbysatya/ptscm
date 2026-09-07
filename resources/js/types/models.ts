@@ -52,6 +52,7 @@ export type NewsArticle = {
     category: string;
     status: 'draft' | 'published';
     published_at: string | null;
+    gallery_images: Array<{ id: number; path: string; sort_order: number }>;
     author?: User;
 };
 

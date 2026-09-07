@@ -67,6 +67,24 @@ export default function NewsDetail({
                         </div>
                     )}
 
+                    {article.gallery_images?.length > 0 && (
+                        <div className="mb-10">
+                            <h2 className="mb-4 text-xl font-bold text-zinc-900">
+                                Gallery Proyek
+                            </h2>
+                            <div className="grid gap-4 sm:grid-cols-2">
+                                {article.gallery_images.map((image, index) => (
+                                    <img
+                                        key={image.id}
+                                        src={`/storage/${image.path}`}
+                                        alt={`${article.title} - foto ${index + 1}`}
+                                        className="aspect-video w-full rounded-sm border border-zinc-200 object-cover"
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
                     <div className="mx-auto max-w-[65ch]">
                         {(article.client_name || article.project_location || article.project_year) && (
                             <div className="mb-8 grid gap-3 rounded-sm border border-zinc-200 bg-zinc-50 p-5 text-sm text-zinc-700 sm:grid-cols-3">

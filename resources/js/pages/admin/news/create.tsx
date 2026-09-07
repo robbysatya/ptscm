@@ -29,7 +29,9 @@ export default function CreateNews({
     categories: Record<string, string>;
 }) {
     const fileInput = useRef<HTMLInputElement>(null);
+    const galleryInput = useRef<HTMLInputElement>(null);
     const [preview, setPreview] = useState<string | null>(null);
+    const [galleryPreviews, setGalleryPreviews] = useState<string[]>([]);
 
     const { data, setData, post, processing, errors } = useForm({
         title: '',
@@ -37,6 +39,7 @@ export default function CreateNews({
         excerpt: '',
         content: '',
         cover_image: null as File | null,
+        gallery_images: [] as File[],
         client_name: '',
         project_location: '',
         project_year: '',
@@ -61,6 +64,12 @@ export default function CreateNews({
         } else {
             setPreview(null);
         }
+    }
+
+    function handleGalleryImages(event: React.ChangeEvent<HTMLInputElement>) {
+        const files = Array.from(event.target.files ?? []);
+        setData('gallery_images', files);
+        setGalleryPreviews(files.map((file) => URL.createObjectURL(file)));
     }
 
     return (
@@ -218,6 +227,46 @@ export default function CreateNews({
                                 />
                                 <InputError message={errors.content} />
                             </div>
+                        </CardContent>
+                    </Card>
+
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Gallery Proyek</CardTitle>
+                            <CardDescription>
+                                Tambahkan hingga 12 foto hasil proyek. Setiap
+                                foto maksimal 2MB.
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent className="space-y-4">
+                            <input
+                                ref={galleryInput}
+                                type="file"
+                                accept="image/jpeg,image/png,image/webp"
+                                multiple
+                                onChange={handleGalleryImages}
+                                className="hidden"
+                            />
+                            {galleryPreviews.length > 0 && (
+                                <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                                    {galleryPreviews.map((image, index) => (
+                                        <img
+                                            key={image}
+                                            src={image}
+                                            alt={`Pratinjau gallery ${index + 1}`}
+                                            className="aspect-square w-full rounded-lg border object-cover"
+                                        />
+                                    ))}
+                                </div>
+                            )}
+                            <Button
+                                type="button"
+                                variant="outline"
+                                onClick={() => galleryInput.current?.click()}
+                            >
+                                Pilih Foto Gallery
+                            </Button>
+                            <InputError message={errors.gallery_images} />
                         </CardContent>
                     </Card>
 

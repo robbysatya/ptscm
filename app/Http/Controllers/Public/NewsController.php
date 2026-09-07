@@ -35,7 +35,7 @@ class NewsController extends Controller
         abort_unless($news->isPublished(), 404);
 
         return Inertia::render('public/news-detail', [
-            'article' => $news->load('author'),
+            'article' => $news->load(['author', 'galleryImages']),
             'relatedArticles' => News::query()
                 ->published()
                 ->whereKeyNot($news->id)
