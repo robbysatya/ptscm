@@ -330,7 +330,7 @@ export default function Home({
                         </h2>
                         <p className="mt-2 text-brand-100">
                             Tim sales kami siap membantu memilih produk baja
-                            ringan yang tepat untuk proyek Anda dan menghitung
+                            ringan yang tepat untuk kebutuhan Anda dan menghitung
                             kebutuhan material.
                         </p>
                     </div>
