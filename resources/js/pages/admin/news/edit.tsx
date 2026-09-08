@@ -1,5 +1,5 @@
 import { Head, Link, useForm } from '@inertiajs/react';
-import { ArrowLeft, ImagePlus } from 'lucide-react';
+import { ArrowLeft, ImagePlus, X } from 'lucide-react';
 import { useRef, useState } from 'react';
 import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
@@ -94,6 +94,21 @@ export default function EditNews({
         setGalleryPreviews(files.map((file) => URL.createObjectURL(file)));
     }
 
+    function removeGalleryImage(index: number) {
+        URL.revokeObjectURL(galleryPreviews[index]);
+        setData(
+            'gallery_images',
+            data.gallery_images.filter((_, fileIndex) => fileIndex !== index),
+        );
+        setGalleryPreviews(
+            galleryPreviews.filter((_, previewIndex) => previewIndex !== index),
+        );
+
+        if (galleryInput.current) {
+            galleryInput.current.value = '';
+        }
+    }
+
     return (
         <>
             <Head title={`Edit Dokumentasi ${article.title}`} />
@@ -152,12 +167,17 @@ export default function EditNews({
 
                             <div className="grid gap-4 md:grid-cols-3">
                                 <div className="grid gap-2">
-                                    <Label htmlFor="client_name">Nama Klien</Label>
+                                    <Label htmlFor="client_name">
+                                        Nama Klien
+                                    </Label>
                                     <Input
                                         id="client_name"
                                         value={data.client_name}
                                         onChange={(event) =>
-                                            setData('client_name', event.target.value)
+                                            setData(
+                                                'client_name',
+                                                event.target.value,
+                                            )
                                         }
                                         placeholder="PT Maju Bersama"
                                     />
@@ -165,20 +185,29 @@ export default function EditNews({
                                 </div>
 
                                 <div className="grid gap-2">
-                                    <Label htmlFor="project_location">Lokasi Dokumentasi</Label>
+                                    <Label htmlFor="project_location">
+                                        Lokasi Dokumentasi
+                                    </Label>
                                     <Input
                                         id="project_location"
                                         value={data.project_location}
                                         onChange={(event) =>
-                                            setData('project_location', event.target.value)
+                                            setData(
+                                                'project_location',
+                                                event.target.value,
+                                            )
                                         }
                                         placeholder="Metro Lampung"
                                     />
-                                    <InputError message={errors.project_location} />
+                                    <InputError
+                                        message={errors.project_location}
+                                    />
                                 </div>
 
                                 <div className="grid gap-2">
-                                    <Label htmlFor="project_year">Tahun Pengerjaan</Label>
+                                    <Label htmlFor="project_year">
+                                        Tahun Pengerjaan
+                                    </Label>
                                     <Input
                                         id="project_year"
                                         type="number"
@@ -186,7 +215,10 @@ export default function EditNews({
                                         max="2100"
                                         value={data.project_year}
                                         onChange={(event) =>
-                                            setData('project_year', event.target.value)
+                                            setData(
+                                                'project_year',
+                                                event.target.value,
+                                            )
                                         }
                                         placeholder="2026"
                                     />
@@ -255,8 +287,8 @@ export default function EditNews({
                         <CardHeader>
                             <CardTitle>Galeri Dokumentasi</CardTitle>
                             <CardDescription>
-                                Tambahkan hingga 12 foto hasil dokumentasi. Foto baru
-                                akan ditambahkan ke galeri yang sudah ada.
+                                Tambahkan hingga 12 foto hasil dokumentasi. Foto
+                                baru akan ditambahkan ke galeri yang sudah ada.
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-4">
@@ -283,12 +315,26 @@ export default function EditNews({
                             {galleryPreviews.length > 0 && (
                                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
                                     {galleryPreviews.map((image, index) => (
-                                        <img
-                                            key={image}
-                                            src={image}
-                                            alt={`Pratinjau galeri ${index + 1}`}
-                                            className="aspect-square w-full rounded-lg border object-cover"
-                                        />
+                                        <div key={image} className="relative">
+                                            <img
+                                                src={image}
+                                                alt={`Pratinjau galeri ${index + 1}`}
+                                                className="aspect-square w-full rounded-lg border object-cover"
+                                            />
+                                            <Button
+                                                type="button"
+                                                variant="destructive"
+                                                size="icon"
+                                                className="absolute top-1 right-1 size-7"
+                                                onClick={() =>
+                                                    removeGalleryImage(index)
+                                                }
+                                                aria-label={`Hapus foto galeri ${index + 1}`}
+                                                title="Hapus foto"
+                                            >
+                                                <X />
+                                            </Button>
+                                        </div>
                                     ))}
                                 </div>
                             )}
@@ -323,7 +369,14 @@ export default function EditNews({
                                 {preview || article.cover_image ? (
                                     <img
                                         src={
-                                            preview ?? (article.cover_image?.startsWith('http') ? article.cover_image : article.cover_image ? `/storage/${article.cover_image}` : '')
+                                            preview ??
+                                            (article.cover_image?.startsWith(
+                                                'http',
+                                            )
+                                                ? article.cover_image
+                                                : article.cover_image
+                                                  ? `/storage/${article.cover_image}`
+                                                  : '')
                                         }
                                         alt="Pratinjau"
                                         className="h-32 w-56 rounded-lg border object-cover"
