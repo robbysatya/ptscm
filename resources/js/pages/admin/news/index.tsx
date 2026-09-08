@@ -40,30 +40,30 @@ export default function NewsIndex({
     }
 
     function remove(article: NewsArticle) {
-        if (window.confirm(`Hapus proyek "${article.title}"?`)) {
+        if (window.confirm(`Hapus dokumentasi "${article.title}"?`)) {
             router.delete(destroyArticle(article.id));
         }
     }
 
     return (
         <>
-            <Head title="Proyek & Galeri" />
+            <Head title="Dokumentasi" />
 
             <div className="flex flex-col gap-6 p-4">
                 <div className="flex flex-wrap items-center justify-between gap-4">
                     <div>
                         <h1 className="text-xl font-semibold tracking-tight">
-                            Proyek &amp; Galeri
+                            Dokumentasi
                         </h1>
                         <p className="text-sm text-muted-foreground">
-                            Kelola proyek, karya, dan dokumentasi kerja sama
+                            Kelola dokumentasi karya dan kerja sama perusahaan.
                             perusahaan.
                         </p>
                     </div>
                     <Button asChild>
                         <Link href={createArticle()}>
                             <Plus />
-                            Tambah Proyek
+                            Tambah Dokumentasi
                         </Link>
                     </Button>
                 </div>
@@ -72,9 +72,9 @@ export default function NewsIndex({
                     <CardHeader className="gap-3">
                         <div className="flex flex-wrap items-center justify-between gap-3">
                             <div>
-                                <CardTitle>Daftar Proyek &amp; Galeri</CardTitle>
+                                <CardTitle>Daftar Dokumentasi</CardTitle>
                                 <CardDescription>
-                                    Total {articles.total} proyek dan galeri.
+                                    Total {articles.total} dokumentasi.
                                 </CardDescription>
                             </div>
                             <form onSubmit={submitSearch} className="relative">
@@ -85,7 +85,7 @@ export default function NewsIndex({
                                     onChange={(event) =>
                                         setSearch(event.target.value)
                                     }
-                                    placeholder="Cari proyek..."
+                                    placeholder="Cari dokumentasi..."
                                     className="h-9 w-64 pl-9"
                                 />
                             </form>
@@ -96,7 +96,7 @@ export default function NewsIndex({
                             <div className="flex flex-col items-center gap-4 py-16 text-center">
                                 <FileText className="size-12 text-muted-foreground/40" />
                                 <p className="text-sm text-muted-foreground">
-                                    Belum ada proyek atau galeri.
+                                    Belum ada dokumentasi.
                                 </p>
                             </div>
                         ) : (
@@ -195,6 +195,6 @@ export default function NewsIndex({
 NewsIndex.layout = {
     breadcrumbs: [
         { title: 'Dashboard', href: adminDashboard() },
-        { title: 'Proyek & Galeri', href: newsIndex() },
+        { title: 'Dokumentasi', href: newsIndex() },
     ],
 };

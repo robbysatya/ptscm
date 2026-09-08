@@ -217,17 +217,17 @@ export default function Home({
                     <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
                         <div>
                             <span className="text-sm font-semibold tracking-wider text-brand-700 uppercase">
-                                Proyek &amp; Galeri
+                                Dokumentasi
                             </span>
                             <h2 className="mt-2 text-3xl font-bold tracking-tight text-zinc-900">
-                                Proyek &amp; Galeri Terbaru
+                                Dokumentasi Terbaru
                             </h2>
                         </div>
                         <Link
                             href={newsIndex()}
                             className="inline-flex items-center gap-1 font-semibold text-brand-700 hover:text-brand-800"
                         >
-                            Semua Proyek
+                            Semua Dokumentasi
                             <ArrowRight className="size-4" />
                         </Link>
                     </div>

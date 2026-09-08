@@ -54,7 +54,7 @@ export function PublicFooter() {
                                 href={newsIndex()}
                                 className="hover:text-white"
                             >
-                                Proyek &amp; Galeri
+                                Dokumentasi
                             </Link>
                         </li>
                     </ul>

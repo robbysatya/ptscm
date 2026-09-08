@@ -12,18 +12,18 @@ export default function News({
 }) {
     return (
         <>
-            <Head title="Proyek & Galeri" />
+            <Head title="Dokumentasi" />
 
             <section className="border-b border-zinc-800 bg-zinc-950 py-16 text-white">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <span className="text-sm font-semibold tracking-wider text-brand-400 uppercase">
-                        Proyek
+                        Dokumentasi
                     </span>
                     <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
-                        Proyek &amp; Galeri Kerja Sama
+                        Dokumentasi Kerja Sama
                     </h1>
                     <p className="mt-4 max-w-2xl text-zinc-300">
-                        Dokumentasi pekerjaan, proyek selesai, dan kolaborasi
+                        Dokumentasi pekerjaan selesai dan kolaborasi
                         perusahaan yang telah kami kerjakan bersama mitra dan
                         pelanggan PT Sarana Cahaya Makmur.
                     </p>
@@ -37,10 +37,10 @@ export default function News({
                             <Newspaper className="size-12 text-zinc-300" />
                             <div>
                                 <h2 className="font-semibold text-zinc-900">
-                                    Belum ada proyek atau galeri
+                                    Belum ada dokumentasi
                                 </h2>
                                 <p className="mt-1 text-sm text-zinc-500">
-                                    Kami sedang menyiapkan dokumentasi proyek dan
+                                    Kami sedang menyiapkan dokumentasi kerja dan
                                     kerja sama terbaru.
                                 </p>
                             </div>
@@ -126,7 +126,7 @@ export default function News({
                                                 </p>
                                             )}
                                             <span className="mt-auto inline-flex items-center gap-1 pt-2 text-sm font-semibold text-brand-700">
-                                                Lihat Detail Proyek
+                                                Lihat Detail Dokumentasi
                                                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
                                             </span>
                                         </div>

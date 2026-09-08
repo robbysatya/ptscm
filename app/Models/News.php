@@ -36,8 +36,8 @@ class News extends Model
 
     /** @var array<string, string> */
     public const CATEGORIES = [
-        'proyek' => 'Proyek Selesai',
-        'galeri' => 'Galeri Pekerjaan',
+        'proyek' => 'Dokumentasi Selesai',
+        'galeri' => 'Dokumentasi Pekerjaan',
         'kerjasama' => 'Kerja Sama',
         'pameran' => 'Pameran',
         'produk' => 'Produk Baru',

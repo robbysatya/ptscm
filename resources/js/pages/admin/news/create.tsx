@@ -74,7 +74,7 @@ export default function CreateNews({
 
     return (
         <>
-            <Head title="Tambah Proyek" />
+            <Head title="Tambah Dokumentasi" />
 
             <div className="flex flex-col gap-6 p-4">
                 <div className="flex items-center gap-4">
@@ -85,10 +85,10 @@ export default function CreateNews({
                     </Button>
                     <div>
                         <h1 className="text-xl font-semibold tracking-tight">
-                            Tambah Proyek
+                            Tambah Dokumentasi
                         </h1>
                         <p className="text-sm text-muted-foreground">
-                            Tambahkan proyek, galeri, atau dokumentasi kerja
+                            Tambahkan dokumentasi kerja sama perusahaan.
                             sama perusahaan.
                         </p>
                     </div>
@@ -97,9 +97,9 @@ export default function CreateNews({
                 <form onSubmit={submit} className="max-w-3xl space-y-6">
                     <Card>
                         <CardHeader>
-                            <CardTitle>Informasi Proyek</CardTitle>
+                            <CardTitle>Informasi Dokumentasi</CardTitle>
                             <CardDescription>
-                                Detail utama proyek atau galeri kerja sama.
+                                Detail utama dokumentasi kerja sama.
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-4">
@@ -111,7 +111,7 @@ export default function CreateNews({
                                     onChange={(event) =>
                                         setData('title', event.target.value)
                                     }
-                                    placeholder="Judul proyek atau kerja sama"
+                                    placeholder="Judul dokumentasi atau kerja sama"
                                 />
                                 <InputError message={errors.title} />
                             </div>
@@ -144,7 +144,7 @@ export default function CreateNews({
                                 </div>
 
                                 <div className="grid gap-2">
-                                    <Label htmlFor="project_location">Lokasi Proyek</Label>
+                                    <Label htmlFor="project_location">Lokasi Dokumentasi</Label>
                                     <Input
                                         id="project_location"
                                         value={data.project_location}
@@ -209,7 +209,7 @@ export default function CreateNews({
                                         setData('excerpt', event.target.value)
                                     }
                                     rows={3}
-                                    placeholder="Ringkasan singkat proyek atau hasil kerja"
+                                    placeholder="Ringkasan singkat dokumentasi atau hasil kerja"
                                 />
                                 <InputError message={errors.excerpt} />
                             </div>
@@ -223,7 +223,7 @@ export default function CreateNews({
                                         setData('content', event.target.value)
                                     }
                                     rows={14}
-                                    placeholder="Deskripsi proyek, pencapaian, dan detail kerja sama. Mendukung HTML sederhana."
+                                    placeholder="Deskripsi dokumentasi, pencapaian, dan detail kerja sama. Mendukung HTML sederhana."
                                 />
                                 <InputError message={errors.content} />
                             </div>
@@ -232,9 +232,9 @@ export default function CreateNews({
 
                     <Card>
                         <CardHeader>
-                            <CardTitle>Gallery Proyek</CardTitle>
+                            <CardTitle>Galeri Dokumentasi</CardTitle>
                             <CardDescription>
-                                Tambahkan hingga 12 foto hasil proyek. Setiap
+                                Tambahkan hingga 12 foto hasil dokumentasi. Setiap
                                 foto maksimal 2MB.
                             </CardDescription>
                         </CardHeader>
@@ -253,7 +253,7 @@ export default function CreateNews({
                                         <img
                                             key={image}
                                             src={image}
-                                            alt={`Pratinjau gallery ${index + 1}`}
+                                            alt={`Pratinjau galeri ${index + 1}`}
                                             className="aspect-square w-full rounded-lg border object-cover"
                                         />
                                     ))}
@@ -264,7 +264,7 @@ export default function CreateNews({
                                 variant="outline"
                                 onClick={() => galleryInput.current?.click()}
                             >
-                                Pilih Foto Gallery
+                                Pilih Foto Galeri
                             </Button>
                             <InputError message={errors.gallery_images} />
                         </CardContent>
@@ -274,7 +274,7 @@ export default function CreateNews({
                         <CardHeader>
                             <CardTitle>Gambar Sampul</CardTitle>
                             <CardDescription>
-                                Unggah gambar sampul proyek (JPG, PNG, atau
+                                Unggah gambar sampul dokumentasi (JPG, PNG, atau
                                 WebP, maks. 2MB).
                             </CardDescription>
                         </CardHeader>
@@ -314,7 +314,7 @@ export default function CreateNews({
                         <CardHeader>
                             <CardTitle>Publikasi</CardTitle>
                             <CardDescription>
-                                Atur status publikasi proyek.
+                                Atur status publikasi dokumentasi.
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-4">
@@ -363,7 +363,7 @@ export default function CreateNews({
 
                     <div className="flex items-center gap-3">
                         <Button type="submit" disabled={processing}>
-                            Simpan Proyek
+                            Simpan Dokumentasi
                         </Button>
                         <Button asChild variant="outline">
                             <Link href={newsIndex()}>Batal</Link>
@@ -378,7 +378,7 @@ export default function CreateNews({
 CreateNews.layout = {
     breadcrumbs: [
         { title: 'Dashboard', href: adminDashboard() },
-        { title: 'Proyek & Galeri', href: newsIndex() },
+        { title: 'Dokumentasi', href: newsIndex() },
         { title: 'Tambah', href: newsIndex() },
     ],
 };

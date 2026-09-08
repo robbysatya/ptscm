@@ -31,7 +31,7 @@ export default function AdminDashboard({
             icon: Shapes,
         },
         {
-            label: 'Proyek & Galeri',
+            label: 'Dokumentasi',
             value: stats.news,
             href: newsIndex(),
             icon: Newspaper,
@@ -82,7 +82,7 @@ export default function AdminDashboard({
                         <p className="mt-1 text-sm text-muted-foreground">
                             Kelola konten website PT Sarana Cahaya Makmur dari
                             menu di samping. Halaman ini menampilkan statistik
-                            jumlah produk, kategori, proyek &amp; galeri, dan
+                            jumlah produk, kategori, dan dokumentasi kerja sama,
                             pengguna sistem.
                         </p>
                     </CardContent>

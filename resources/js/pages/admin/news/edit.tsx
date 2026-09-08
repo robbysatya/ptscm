@@ -96,7 +96,7 @@ export default function EditNews({
 
     return (
         <>
-            <Head title={`Edit Proyek ${article.title}`} />
+            <Head title={`Edit Dokumentasi ${article.title}`} />
 
             <div className="flex flex-col gap-6 p-4">
                 <div className="flex items-center gap-4">
@@ -107,10 +107,10 @@ export default function EditNews({
                     </Button>
                     <div>
                         <h1 className="text-xl font-semibold tracking-tight">
-                            Edit Proyek
+                            Edit Dokumentasi
                         </h1>
                         <p className="text-sm text-muted-foreground">
-                            Perbarui detail proyek {article.title}.
+                            Perbarui detail dokumentasi {article.title}.
                         </p>
                     </div>
                 </div>
@@ -118,9 +118,9 @@ export default function EditNews({
                 <form onSubmit={submit} className="max-w-3xl space-y-6">
                     <Card>
                         <CardHeader>
-                            <CardTitle>Informasi Proyek</CardTitle>
+                            <CardTitle>Informasi Dokumentasi</CardTitle>
                             <CardDescription>
-                                Detail utama proyek atau galeri kerja sama.
+                                Detail utama dokumentasi kerja sama.
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-4">
@@ -132,7 +132,7 @@ export default function EditNews({
                                     onChange={(event) =>
                                         setData('title', event.target.value)
                                     }
-                                    placeholder="Judul proyek atau kerja sama"
+                                    placeholder="Judul dokumentasi atau kerja sama"
                                 />
                                 <InputError message={errors.title} />
                             </div>
@@ -165,7 +165,7 @@ export default function EditNews({
                                 </div>
 
                                 <div className="grid gap-2">
-                                    <Label htmlFor="project_location">Lokasi Proyek</Label>
+                                    <Label htmlFor="project_location">Lokasi Dokumentasi</Label>
                                     <Input
                                         id="project_location"
                                         value={data.project_location}
@@ -230,7 +230,7 @@ export default function EditNews({
                                         setData('excerpt', event.target.value)
                                     }
                                     rows={3}
-                                    placeholder="Ringkasan singkat proyek atau hasil kerja"
+                                    placeholder="Ringkasan singkat dokumentasi atau hasil kerja"
                                 />
                                 <InputError message={errors.excerpt} />
                             </div>
@@ -244,7 +244,7 @@ export default function EditNews({
                                         setData('content', event.target.value)
                                     }
                                     rows={14}
-                                    placeholder="Deskripsi proyek, pencapaian, dan detail kerja sama. Mendukung HTML sederhana."
+                                    placeholder="Deskripsi dokumentasi, pencapaian, dan detail kerja sama. Mendukung HTML sederhana."
                                 />
                                 <InputError message={errors.content} />
                             </div>
@@ -253,10 +253,10 @@ export default function EditNews({
 
                     <Card>
                         <CardHeader>
-                            <CardTitle>Gallery Proyek</CardTitle>
+                            <CardTitle>Galeri Dokumentasi</CardTitle>
                             <CardDescription>
-                                Tambahkan hingga 12 foto hasil proyek. Foto baru
-                                akan ditambahkan ke gallery yang sudah ada.
+                                Tambahkan hingga 12 foto hasil dokumentasi. Foto baru
+                                akan ditambahkan ke galeri yang sudah ada.
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-4">
@@ -274,7 +274,7 @@ export default function EditNews({
                                         <img
                                             key={image.id}
                                             src={`/storage/${image.path}`}
-                                            alt="Foto gallery proyek"
+                                            alt="Foto galeri dokumentasi"
                                             className="aspect-square w-full rounded-lg border object-cover"
                                         />
                                     ))}
@@ -286,7 +286,7 @@ export default function EditNews({
                                         <img
                                             key={image}
                                             src={image}
-                                            alt={`Pratinjau gallery ${index + 1}`}
+                                            alt={`Pratinjau galeri ${index + 1}`}
                                             className="aspect-square w-full rounded-lg border object-cover"
                                         />
                                     ))}
@@ -297,7 +297,7 @@ export default function EditNews({
                                 variant="outline"
                                 onClick={() => galleryInput.current?.click()}
                             >
-                                Pilih Foto Gallery
+                                Pilih Foto Galeri
                             </Button>
                             <InputError message={errors.gallery_images} />
                         </CardContent>
@@ -307,7 +307,7 @@ export default function EditNews({
                         <CardHeader>
                             <CardTitle>Gambar Sampul</CardTitle>
                             <CardDescription>
-                                Unggah gambar sampul proyek (JPG, PNG, atau
+                                Unggah gambar sampul dokumentasi (JPG, PNG, atau
                                 WebP, maks. 2MB).
                             </CardDescription>
                         </CardHeader>
@@ -371,7 +371,7 @@ export default function EditNews({
                         <CardHeader>
                             <CardTitle>Publikasi</CardTitle>
                             <CardDescription>
-                                Atur status publikasi proyek.
+                                Atur status publikasi dokumentasi.
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-4">
@@ -438,7 +438,7 @@ export default function EditNews({
 EditNews.layout = {
     breadcrumbs: [
         { title: 'Dashboard', href: adminDashboard() },
-        { title: 'Proyek & Galeri', href: newsIndex() },
+        { title: 'Dokumentasi', href: newsIndex() },
         { title: 'Edit', href: newsIndex() },
     ],
 };

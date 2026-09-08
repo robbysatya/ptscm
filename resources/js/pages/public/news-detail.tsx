@@ -22,7 +22,7 @@ export default function NewsDetail({
                         className="inline-flex items-center gap-1 text-sm text-zinc-400 hover:text-white"
                     >
                         <ArrowLeft className="size-4" />
-                        Kembali ke Proyek &amp; Galeri
+                        Kembali ke Dokumentasi
                     </Link>
                     <div className="mt-6 flex items-center gap-3">
                         <span className="rounded-sm bg-brand-700 px-2 py-0.5 text-xs font-semibold tracking-wide text-white uppercase">
@@ -70,7 +70,7 @@ export default function NewsDetail({
                     {article.gallery_images?.length > 0 && (
                         <div className="mb-10">
                             <h2 className="mb-4 text-xl font-bold text-zinc-900">
-                                Gallery Proyek
+                                Galeri Dokumentasi
                             </h2>
                             <div className="grid gap-4 sm:grid-cols-2">
                                 {article.gallery_images.map((image, index) => (
@@ -140,13 +140,13 @@ export default function NewsDetail({
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="flex items-end justify-between gap-6">
                             <h2 className="text-2xl font-bold tracking-tight text-zinc-900">
-                                Proyek Lainnya
+                                Dokumentasi Lainnya
                             </h2>
                             <Link
                                 href={newsIndex()}
                                 className="inline-flex items-center gap-1 text-sm font-semibold text-brand-700 hover:text-brand-800"
                             >
-                                Semua Proyek
+                                Semua Dokumentasi
                                 <ArrowRight className="size-4" />
                             </Link>
                         </div>
