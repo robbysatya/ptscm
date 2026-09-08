@@ -1,7 +1,12 @@
-import { Head } from '@inertiajs/react';
+import { Head, usePage } from '@inertiajs/react';
 import { Clock, Mail, MapPin, Phone } from 'lucide-react';
+import type { ContactSettings } from '@/types/global';
 
 export default function Contact() {
+    const { contactSettings } = usePage<{
+        contactSettings: ContactSettings;
+    }>().props;
+
     return (
         <>
             <Head title="Kontak" />
@@ -40,20 +45,17 @@ export default function Contact() {
                             {
                                 icon: MapPin,
                                 title: 'Alamat',
-                                lines: [
-                                    ' Jl. Jendral Sudirman No.260, Ganjarasri, Metro Barat,',
-                                    'Kota Metro, Lampung 34121',
-                                ],
+                                lines: [contactSettings.address],
                             },
                             {
                                 icon: Phone,
                                 title: 'Telepon / WhatsApp',
-                                lines: ['+62 812-3456-7890'],
+                                lines: contactSettings.whatsapp_numbers,
                             },
                             {
                                 icon: Mail,
                                 title: 'Email',
-                                lines: ['info@ptscm.net'],
+                                lines: contactSettings.emails,
                             },
                             {
                                 icon: Clock,

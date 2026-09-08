@@ -1,10 +1,15 @@
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { Mail, MapPin, Phone } from 'lucide-react';
 import { about, contact, home } from '@/routes';
 import { index as newsIndex } from '@/routes/news';
 import { index as productsIndex } from '@/routes/products';
+import type { ContactSettings } from '@/types/global';
 
 export function PublicFooter() {
+    const { contactSettings } = usePage<{
+        contactSettings: ContactSettings;
+    }>().props;
+
     return (
         <footer className="bg-zinc-950 text-zinc-400">
             <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
@@ -67,18 +72,33 @@ export function PublicFooter() {
                     <ul className="space-y-3 text-sm">
                         <li className="flex items-start gap-3">
                             <MapPin className="mt-0.5 size-4 shrink-0 text-brand-500" />
-                            <span>
-                                Jl. Jendral Sudirman No.260, Ganjarasri, Metro Barat, Kota Metro, Lampung 34121
-                            </span>
+                            <span>{contactSettings.address}</span>
                         </li>
-                        <li className="flex items-center gap-3">
-                            <Phone className="size-4 shrink-0 text-brand-500" />
-                            <span>+62 812-3456-7890</span>
-                        </li>
-                        <li className="flex items-center gap-3">
-                            <Mail className="size-4 shrink-0 text-brand-500" />
-                            <span>info@ptscm.net</span>
-                        </li>
+                        {contactSettings.whatsapp_numbers.map((number) => (
+                            <li
+                                key={number}
+                                className="flex items-center gap-3"
+                            >
+                                <Phone className="size-4 shrink-0 text-brand-500" />
+                                <a
+                                    href={`https://wa.me/${number.replace(/\D/g, '')}`}
+                                    className="hover:text-white"
+                                >
+                                    {number}
+                                </a>
+                            </li>
+                        ))}
+                        {contactSettings.emails.map((email) => (
+                            <li key={email} className="flex items-center gap-3">
+                                <Mail className="size-4 shrink-0 text-brand-500" />
+                                <a
+                                    href={`mailto:${email}`}
+                                    className="hover:text-white"
+                                >
+                                    {email}
+                                </a>
+                            </li>
+                        ))}
                     </ul>
                 </div>
 

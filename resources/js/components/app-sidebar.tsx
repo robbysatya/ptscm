@@ -6,6 +6,7 @@ import {
     LayoutGrid,
     Newspaper,
     Package,
+    Phone,
     Shapes,
     Users,
 } from 'lucide-react';
@@ -24,6 +25,7 @@ import {
 } from '@/components/ui/sidebar';
 import { dashboard as adminDashboard } from '@/routes/admin';
 import { index as categoriesIndex } from '@/routes/admin/categories';
+import { edit as contactSettingsEdit } from '@/routes/admin/contact-settings';
 import { index as newsIndex } from '@/routes/admin/news';
 import { index as productsIndex } from '@/routes/admin/products';
 import { index as slidesIndex } from '@/routes/admin/slides';
@@ -55,6 +57,11 @@ export function AppSidebar() {
             title: 'Dokumentasi',
             href: newsIndex(),
             icon: Newspaper,
+        },
+        {
+            title: 'Kontak Website',
+            href: contactSettingsEdit(),
+            icon: Phone,
         },
         ...(canManageUsers
             ? [

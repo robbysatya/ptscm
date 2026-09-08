@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\ContactSetting;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -41,7 +43,22 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'contactSettings' => fn (): array => $this->contactSettings(),
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
         ];
+    }
+
+    /**
+     * Keep public pages renderable before the contact settings table is available.
+     *
+     * @return array{address: string, whatsapp_numbers: list<string>, emails: list<string>}
+     */
+    private function contactSettings(): array
+    {
+        try {
+            return ContactSetting::query()->first()?->toContactArray() ?? ContactSetting::defaults();
+        } catch (QueryException) {
+            return ContactSetting::defaults();
+        }
     }
 }

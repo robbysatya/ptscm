@@ -2,6 +2,7 @@
 
 use App\Enums\UserRole;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\ContactSettingController as AdminContactSettingController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
@@ -33,6 +34,8 @@ Route::prefix('admin')
         Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
 
         Route::resource('categories', AdminCategoryController::class)->except('show');
+        Route::get('contact-settings', [AdminContactSettingController::class, 'edit'])->name('contact-settings.edit');
+        Route::put('contact-settings', [AdminContactSettingController::class, 'update'])->name('contact-settings.update');
         Route::resource('products', AdminProductController::class)->except('show');
         Route::resource('news', AdminNewsController::class)->except('show');
 

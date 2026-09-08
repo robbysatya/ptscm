@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { about, contact, home } from '@/routes';
 import { index as newsIndex } from '@/routes/news';
 import { index as productsIndex } from '@/routes/products';
+import type { ContactSettings } from '@/types/global';
 
 const navItems = [
     { title: 'Beranda', href: home() },
@@ -14,11 +15,17 @@ const navItems = [
 ];
 
 export function PublicHeader() {
-    const { url } = usePage();
+    const page = usePage<{
+        contactSettings: ContactSettings;
+    }>();
+    const { contactSettings } = page.props;
+    const { url } = page;
     const [open, setOpen] = useState(false);
 
     const normalizePath = (value: string) => {
-        const pathname = value.startsWith('http') ? new URL(value).pathname : value;
+        const pathname = value.startsWith('http')
+            ? new URL(value).pathname
+            : value;
 
         return pathname.replace(/\/+$/, '') || '/';
     };
@@ -27,7 +34,10 @@ export function PublicHeader() {
         const currentPath = normalizePath(url);
         const targetPath = normalizePath(href.url);
 
-        return currentPath === targetPath || (targetPath !== '/' && currentPath.startsWith(`${targetPath}/`));
+        return (
+            currentPath === targetPath ||
+            (targetPath !== '/' && currentPath.startsWith(`${targetPath}/`))
+        );
     };
 
     return (
@@ -36,11 +46,11 @@ export function PublicHeader() {
                 <div className="mx-auto flex h-9 max-w-7xl items-center justify-between gap-4 px-4 text-xs sm:px-6 lg:px-8">
                     <p className="hidden items-center gap-2 sm:flex">
                         <Phone className="size-3.5 text-brand-400" />
-                        +62 812-3456-7890
+                        {contactSettings.whatsapp_numbers.join(' / ')}
                     </p>
                     <p className="flex items-center gap-2">
                         <Mail className="size-3.5 text-brand-400" />
-                        info@ptscm.net
+                        {contactSettings.emails[0]}
                     </p>
                     <p className="hidden items-center gap-2 md:flex">
                         <span className="size-1.5 rounded-full bg-brand-500" />

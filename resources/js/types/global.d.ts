@@ -1,5 +1,11 @@
 import type { Auth } from '@/types/auth';
 
+export type ContactSettings = {
+    address: string;
+    whatsapp_numbers: string[];
+    emails: string[];
+};
+
 declare module 'react' {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface InputHTMLAttributes<T> {
@@ -12,6 +18,7 @@ declare module '@inertiajs/core' {
         sharedPageProps: {
             name: string;
             auth: Auth;
+            contactSettings: ContactSettings;
             sidebarOpen: boolean;
             [key: string]: unknown;
         };
